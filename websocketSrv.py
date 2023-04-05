@@ -19,11 +19,11 @@ async def processWs(queue):
         try:
             async with websockets.connect("ws://localhost:8080") as websocket:
                 djangoWS = websocket
-                logging.info ("djangoWs: connect OK ", djangoWS)
-                logging.info ("djangoWs: connect OK ", queue)
+                logging.info ("djangoWs: connect OK %s", djangoWS)
+                logging.info ("djangoWs: connect OK %s", queue)
                 while True:
                     message = await websocket.recv()
-                    logging.info (" >>>> djangoWs::received: ", message)
+                    logging.info (" >>>> djangoWs::received: %s", message)
                     queue.put(message)
                 await asyncio.Future()
         except RuntimeError as e:
@@ -92,7 +92,7 @@ async def sendToDjango(websocket, queue):
 
 
 async def main(port, queue):
-    logging.info ("main, port=", port)
+    logging.info ("main, port=%s", port)
     async with websockets.serve(
         sendToDjango,
         host="",
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     print  ("Start websocket server ...")
     logging.debug("Logging startted")
     port=os.environ.get('WSPORT', '8080')
-    logging.info('port=',port)
+    logging.info('port=%s',port)
     global cientReadQueue
     
     # create the shared queues
@@ -118,11 +118,11 @@ if __name__ == "__main__":
     # start the django thread ws client
     djangoClientWs = Thread(target=djangoWsTask, daemon=True, args=(clientWriteQueue,))
     djangoClientWs.start()
-    logging.info ("djangoClentWs=",djangoClientWs)
+    logging.info ("djangoClentWs=%s",djangoClientWs)
     # start the django thread queue consumer
     djangoClientQueue = Thread(target=djangoQueueTask, args=(clientReadQueue,))
     djangoClientQueue.start()
-    logging.info ("djangoClentQueue=",djangoClientQueue)
+    logging.info ("djangoClentQueue=%s",djangoClientQueue)
     
     # start server thread queue consumer
     srvConsumerTh = Thread(target=srvConsumer, args=(clientWriteQueue,))

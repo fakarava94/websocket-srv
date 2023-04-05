@@ -17,7 +17,7 @@ async def processWs(queue):
     global djangoWS
     while True:
         try:
-            async with websockets.connect("ws://localhost:8081") as websocket:
+            async with websockets.connect("ws://localhost:8080") as websocket:
                 djangoWS = websocket
                 logging.info ("djangoWs: connect OK ", djangoWS)
                 logging.info ("djangoWs: connect OK ", queue)

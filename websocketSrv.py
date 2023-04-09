@@ -115,7 +115,7 @@ if __name__ == "__main__":
     
     interfaces = getnic.interfaces()
     addr=getnic.ipaddr(interfaces)
-    logging.info ('interfaces=s',interfaces)
+    logging.info ('interfaces=%s',interfaces)
     logging.info ('addr=%s',addr)
 
     # create the shared queues

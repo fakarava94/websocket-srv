@@ -8,6 +8,7 @@ from threading import Thread
 from queue import Queue
 import time
 from get_nic import getnic
+import platform
 
 djangoWs = None
 srvWs = None
@@ -18,7 +19,7 @@ async def processWs(queue):
     global djangoWS
     while True:
         try:
-            async with websockets.connect("wss://44.226.145.213/strava2/stream/") as websocket:
+            async with websockets.connect("ws://44.226.145.213/strava2/stream/") as websocket:
                 djangoWS = websocket
                 logging.info ("djangoWs: connect OK %s", djangoWS)
                 logging.info ("djangoWs: connect OK %s", queue)
@@ -113,6 +114,8 @@ if __name__ == "__main__":
     logging.info('port=%s',port)
     global cientReadQueue
     
+    logging.info ('platform=%s',platform.platform
+    logging.info ('os.manme=%s',os.name)
     interfaces = getnic.interfaces()
     addr=getnic.ipaddr(interfaces)
     logging.info ('interfaces=%s',interfaces)

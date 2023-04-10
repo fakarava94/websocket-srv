@@ -114,8 +114,8 @@ if __name__ == "__main__":
     logging.info('port=%s',port)
     global cientReadQueue
     
-    logging.info ('platform=%s',platform.platform
-    logging.info ('os.manme=%s',os.name)
+    logging.info ('platform=%s',platform.platform)
+    logging.info ('os.name=%s',os.name)
     interfaces = getnic.interfaces()
     addr=getnic.ipaddr(interfaces)
     logging.info ('interfaces=%s',interfaces)

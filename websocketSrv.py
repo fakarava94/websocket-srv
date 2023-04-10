@@ -18,7 +18,7 @@ async def processWs(queue):
     global djangoWS
     while True:
         try:
-            async with websockets.connect("wss://django-srv.onrender.com/strava2/stream/") as websocket:
+            async with websockets.connect("wss://44.226.145.213/strava2/stream/") as websocket:
                 djangoWS = websocket
                 logging.info ("djangoWs: connect OK %s", djangoWS)
                 logging.info ("djangoWs: connect OK %s", queue)
